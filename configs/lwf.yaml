@@ -1,0 +1,33 @@
+method: lwf
+dataset:
+  name: cifar100
+  image_size: 32
+  mean: [0.5071, 0.4866, 0.4409]
+  std: [0.2673, 0.2564, 0.2762]
+  num_workers: 4
+
+model:
+  name: resnet32
+  base_class: 10
+  incremental_class: 10
+
+device: cuda:2
+
+train:
+  optimizer:
+    name: sgd
+    weight_decay: 0.00001
+    momentum: 0.9
+  base_lr: 0.1
+  scheduler_epochs: [100, 150, 200]
+  scheduler_gamma: 0.1
+  num_epochs: 250
+  batch_size: 64
+
+distillation:
+  use_mer: False
+  temperature: 2.0
+  alpha: 1.0
+
+eval:
+  batch_size: 256
